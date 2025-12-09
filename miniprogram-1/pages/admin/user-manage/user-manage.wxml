@@ -1,0 +1,51 @@
+<!--pages/admin/user-manage/user-manage.wxml-->
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">用户管理</text>
+    <text class="total-count">共 {{total}} 人</text>
+  </view>
+
+  <view wx:if="{{loading && users.length === 0}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{users.length === 0}}" class="empty">
+    <text class="empty-text">暂无用户</text>
+  </view>
+
+  <view wx:else class="user-list">
+    <view 
+      wx:for="{{users}}" 
+      wx:key="id" 
+      class="user-card"
+      data-user="{{item}}"
+      bindtap="handleViewUser"
+    >
+      <view class="user-header">
+        <view class="user-avatar">{{item.nickname ? item.nickname.substring(0,1) : 'U'}}</view>
+        <view class="user-main">
+          <view class="user-name">{{item.nickname || item.username}}</view>
+          <view class="user-username">@{{item.username}}</view>
+        </view>
+        <view class="user-id">ID: {{item.id}}</view>
+      </view>
+
+      <view class="user-info">
+        <view class="info-row">
+          <text class="label">手机号</text>
+          <text class="value">{{item.phone || '未绑定'}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">注册时间</text>
+          <text class="value">{{item.created_at}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多提示 -->
+    <view class="load-status">
+      <text wx:if="{{hasMore && !loading}}">上拉加载更多</text>
+      <text wx:elif="{{loading}}">加载中...</text>
+      <text wx:else>已加载全部 {{total}} 个用户</text>
+    </view>
+  </view>
+</view>
+

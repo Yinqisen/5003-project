@@ -1,0 +1,212 @@
+### 微信点餐小程序 API 测试文件
+### 使用方法：安装 REST Client 插件，点击 Send Request 发送请求
+
+### 基础URL
+@baseUrl = http://localhost:8000/api
+@adminToken = admin_1
+@userToken = user_1
+
+### ============================================
+### 1. 管理员相关接口
+### ============================================
+
+### 1.1 管理员登录
+POST {{baseUrl}}/admin/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
+### 1.2 创建管理员
+POST {{baseUrl}}/admin/create
+Content-Type: application/json
+token: {{adminToken}}
+
+{
+  "username": "test_admin",
+  "password": "123456",
+  "real_name": "测试管理员"
+}
+
+### 1.3 管理员列表
+GET {{baseUrl}}/admin/list
+token: {{adminToken}}
+
+### ============================================
+### 2. 用户相关接口
+### ============================================
+
+### 2.1 用户登录
+POST {{baseUrl}}/user/login
+Content-Type: application/json
+
+{
+  "code": "test_user_001"
+}
+
+### 2.2 获取用户信息
+GET {{baseUrl}}/user/info
+token: {{userToken}}
+
+### 2.3 更新用户信息
+PUT {{baseUrl}}/user/update
+Content-Type: application/json
+token: {{userToken}}
+
+{
+  "nickname": "美食爱好者",
+  "phone": "13800138000"
+}
+
+### ============================================
+### 3. 分类相关接口
+### ============================================
+
+### 3.1 获取分类列表
+GET {{baseUrl}}/category/list?status=1
+
+### 3.2 创建分类
+POST {{baseUrl}}/category/create
+Content-Type: application/json
+token: {{adminToken}}
+
+{
+  "name": "特色菜",
+  "sort_order": 6
+}
+
+### 3.3 更新分类
+PUT {{baseUrl}}/category/1
+Content-Type: application/json
+token: {{adminToken}}
+
+{
+  "name": "热菜推荐",
+  "sort_order": 1
+}
+
+### 3.4 删除分类
+DELETE {{baseUrl}}/category/10
+token: {{adminToken}}
+
+### ============================================
+### 4. 菜品相关接口
+### ============================================
+
+### 4.1 获取菜品列表
+GET {{baseUrl}}/dish/list?status=1&page=1&page_size=10
+
+### 4.2 获取指定分类的菜品
+GET {{baseUrl}}/dish/list?category_id=1&status=1
+
+### 4.3 获取菜品详情
+GET {{baseUrl}}/dish/1
+
+### 4.4 创建菜品
+POST {{baseUrl}}/dish/create
+Content-Type: application/json
+token: {{adminToken}}
+
+{
+  "category_id": 1,
+  "name": "水煮鱼",
+  "description": "麻辣鲜香，鱼肉细嫩",
+  "price": 58.00,
+  "sort_order": 1
+}
+
+### 4.5 更新菜品
+PUT {{baseUrl}}/dish/1
+Content-Type: application/json
+token: {{adminToken}}
+
+{
+  "name": "宫保鸡丁（特惠）",
+  "price": 35.00,
+  "status": 1
+}
+
+### 4.6 删除菜品
+DELETE {{baseUrl}}/dish/20
+token: {{adminToken}}
+
+### ============================================
+### 5. 订单相关接口
+### ============================================
+
+### 5.1 创建订单
+POST {{baseUrl}}/order/create
+Content-Type: application/json
+token: user_1
+
+{
+  "user_id": 1,
+  "items": [
+    {
+      "dish_id": 1,
+      "dish_name": "宫保鸡丁",
+      "dish_price": 38.00,
+      "quantity": 2
+    },
+    {
+      "dish_id": 8,
+      "dish_name": "白米饭",
+      "dish_price": 3.00,
+      "quantity": 2
+    }
+  ],
+  "remark": "少辣，多加米饭"
+}
+
+### 5.2 获取我的订单
+GET {{baseUrl}}/order/my?page=1&page_size=10
+token: {{userToken}}
+
+### 5.3 获取指定状态的订单
+GET {{baseUrl}}/order/my?status=1&page=1&page_size=10
+token: {{userToken}}
+
+### 5.4 获取订单详情
+GET {{baseUrl}}/order/1
+token: {{userToken}}
+
+### 5.5 获取所有订单（管理员）
+GET {{baseUrl}}/order/list?page=1&page_size=10
+token: {{adminToken}}
+
+### 5.6 更新订单状态（管理员）
+PUT {{baseUrl}}/order/1/status
+Content-Type: application/json
+token: {{adminToken}}
+
+{
+  "status": 2
+}
+
+### 5.7 取消订单
+DELETE {{baseUrl}}/order/1
+token: {{userToken}}
+
+### ============================================
+### 6. 统计相关接口
+### ============================================
+
+### 6.1 获取数据统计概览
+GET {{baseUrl}}/statistics/overview
+token: {{adminToken}}
+
+### ============================================
+### 7. 其他接口
+### ============================================
+
+### 7.1 根路径
+GET http://localhost:8000/
+
+### 7.2 API文档
+GET http://localhost:8000/docs
+
+### 7.3 OpenAPI Schema
+GET http://localhost:8000/openapi.json
+

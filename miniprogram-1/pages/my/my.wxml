@@ -1,0 +1,45 @@
+<!--pages/my/my.wxml-->
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="user-section">
+    <view class="user-header">
+      <view class="avatar">
+        <image 
+          wx:if="{{userInfo.avatar_url}}"
+          class="avatar-image"
+          src="{{userInfo.avatar_url}}"
+          mode="aspectFill"
+        ></image>
+        <view wx:else class="avatar-placeholder">{{userInfo.nickname ? userInfo.nickname.substring(0,1) : '用'}}</view>
+      </view>
+      <view class="user-info">
+        <view class="nickname">
+          {{userInfo.nickname || '新用户'}}
+          <text wx:if="{{isAdmin}}" class="admin-badge">管理员</text>
+        </view>
+        <view class="phone">{{userInfo.phone || userInfo.username || '未绑定手机号'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 菜单列表 -->
+  <view class="menu-section">
+    <view 
+      wx:for="{{menuList}}" 
+      wx:key="name" 
+      class="menu-item"
+      data-item="{{item}}"
+      bindtap="handleMenuClick"
+    >
+      <view class="menu-icon">{{item.icon}}</view>
+      <view class="menu-name">{{item.name}}</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>版本号：v1.0.0</text>
+  </view>
+</view>
+

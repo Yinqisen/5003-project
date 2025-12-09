@@ -1,0 +1,259 @@
+/* pages/index/index.wxss */
+.container {
+  padding-bottom: 120rpx;
+}
+
+/* 分类导航 */
+.category-nav {
+  background-color: white;
+  padding: 20rpx 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.category-scroll {
+  white-space: nowrap;
+  padding: 0 20rpx;
+}
+
+.category-item {
+  display: inline-block;
+  padding: 10rpx 30rpx;
+  margin-right: 20rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  color: #666;
+  background-color: #f5f5f5;
+  transition: all 0.3s;
+}
+
+.category-item.active {
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: bold;
+}
+
+/* 菜品列表 */
+.dish-list {
+  padding: 20rpx;
+}
+
+.loading, .empty-state {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.dish-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.dish-card {
+  background-color: white;
+  border-radius: 15rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.dish-card:active {
+  transform: scale(0.98);
+}
+
+.dish-image {
+  width: 100%;
+  height: 260rpx;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.dish-placeholder-text {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+}
+
+.dish-real-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dish-info {
+  padding: 20rpx;
+}
+
+.dish-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dish-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 15rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dish-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dish-price {
+  color: #ff6b6b;
+}
+
+.price-symbol {
+  font-size: 24rpx;
+}
+
+.price-value {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.dish-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn-add {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.btn-minus, .btn-plus {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.btn-minus {
+  background-color: #ccc;
+}
+
+.quantity {
+  font-size: 28rpx;
+  font-weight: bold;
+  min-width: 40rpx;
+  text-align: center;
+}
+
+/* 购物车底栏 */
+.cart-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+  z-index: 200;
+}
+
+.cart-info {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 60rpx;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  background-color: #ff6b6b;
+  color: white;
+  font-size: 20rpx;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.cart-price .label {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.cart-price .price {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-clear {
+  padding: 15rpx 30rpx;
+  border-radius: 30rpx;
+  background-color: #f5f5f5;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.btn-checkout {
+  padding: 15rpx 50rpx;
+  border-radius: 30rpx;
+  background-color: #ff6b6b;
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+}

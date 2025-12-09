@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/cart/cart",
+    "pages/order/order",
+    "pages/order-detail/order-detail",
+    "pages/my/my",
+    "pages/admin/dish-manage/dish-manage",
+    "pages/admin/order-manage/order-manage",
+    "pages/admin/statistics/statistics",
+    "pages/admin/user-manage/user-manage"
+  ],
+  "window": {
+    "navigationBarTitleText": "点餐小程序",
+    "navigationBarBackgroundColor": "#ff6b6b",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff6b6b",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "点餐"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

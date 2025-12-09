@@ -1,0 +1,94 @@
+/* pages/login/login.wxss */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 60rpx;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 80rpx;
+}
+
+.logo {
+  width: 300rpx;
+  height: 180rpx;
+  margin-bottom: 40rpx;
+}
+
+.title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.login-content {
+  width: 100%;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  color: white;
+  margin-bottom: 15rpx;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  height: 90rpx;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15rpx;
+  padding: 0 30rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.login-btn {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background-color: white;
+  color: #ff6b6b;
+  border-radius: 45rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.switch-mode {
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: white;
+  text-decoration: underline;
+}
+
+.login-tips {
+  margin-top: 60rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.link {
+  color: white;
+  text-decoration: underline;
+}
+

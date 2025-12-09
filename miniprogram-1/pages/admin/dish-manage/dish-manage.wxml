@@ -1,0 +1,182 @@
+<!--pages/admin/dish-manage/dish-manage.wxml-->
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">菜品管理</text>
+    <button class="btn-add" bindtap="handleAddDish">+ 添加菜品</button>
+  </view>
+
+  <!-- 分类标签 -->
+  <scroll-view class="category-tabs" scroll-x>
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="id"
+      class="category-tab {{currentCategory === item.id ? 'active' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="handleCategoryChange"
+    >
+      {{item.name}}
+    </view>
+  </scroll-view>
+
+  <!-- 菜品列表 -->
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  
+  <view wx:elif="{{dishes.length === 0}}" class="empty">
+    <text class="empty-text">暂无菜品</text>
+  </view>
+
+  <view wx:else class="dish-list">
+    <view wx:for="{{dishes}}" wx:key="id" class="dish-item">
+      <view class="dish-header">
+        <view class="dish-image-box">
+          <image 
+            wx:if="{{item.image_url}}"
+            src="{{item.image_url}}" 
+            mode="aspectFill"
+            class="dish-thumb"
+          ></image>
+          <view wx:else class="dish-placeholder-text">暂无图片</view>
+        </view>
+        
+        <view class="dish-info">
+          <view class="dish-name">
+            {{item.name}}
+            <text class="status-badge {{item.status === 1 ? 'active' : 'inactive'}}">
+              {{item.status === 1 ? '已上架' : '已下架'}}
+            </text>
+          </view>
+          <view class="dish-desc">{{item.description || '暂无描述'}}</view>
+          <view class="dish-meta">
+            <text class="price">¥{{item.price}}</text>
+            <text class="sales">销量：{{item.sales}}</text>
+            <text class="category">{{item.category_name}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="dish-actions">
+        <button 
+          class="btn-action" 
+          data-dish="{{item}}"
+          bindtap="handleToggleStatus"
+        >
+          {{item.status === 1 ? '下架' : '上架'}}
+        </button>
+        <button 
+          class="btn-action primary" 
+          data-dish="{{item}}"
+          bindtap="handleEditDish"
+        >
+          编辑
+        </button>
+        <button 
+          class="btn-action danger" 
+          data-dish="{{item}}"
+          bindtap="handleDeleteDish"
+        >
+          删除
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view wx:if="{{showEditModal}}" class="modal-overlay" bindtap="handleCloseEdit">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">{{editingDish ? '编辑菜品' : '添加菜品'}}</text>
+        <view class="btn-close" bindtap="handleCloseEdit">✕</view>
+      </view>
+
+      <view class="modal-body">
+        <!-- 图片上传 -->
+        <view class="form-item">
+          <text class="form-label">菜品图片</text>
+          <view class="image-upload-area">
+            <view wx:if="{{editForm.image_url}}" class="image-preview">
+              <image src="{{editForm.image_url}}" mode="aspectFill" class="preview-image"></image>
+              <view class="image-actions">
+                <view class="btn-change" bindtap="handleChooseImage">更换</view>
+                <view class="btn-delete-img" bindtap="handleDeleteImage">删除</view>
+              </view>
+            </view>
+            <view wx:else class="upload-box" bindtap="handleChooseImage">
+              <view class="upload-icon">{{uploadingImage ? '...' : '+'}}</view>
+              <text class="upload-text">{{uploadingImage ? '正在上传' : '点击上传图片'}}</text>
+              <text class="upload-tip">支持JPG、PNG、GIF，不超过5MB</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="form-item">
+          <text class="form-label">菜品名称 *</text>
+          <input 
+            class="form-input" 
+            placeholder="请输入菜品名称"
+            value="{{editForm.name}}"
+            data-field="name"
+            bindinput="handleFormInput"
+          />
+        </view>
+
+        <view class="form-item">
+          <text class="form-label">价格 *</text>
+          <input 
+            class="form-input" 
+            type="digit"
+            placeholder="请输入价格"
+            value="{{editForm.price}}"
+            data-field="price"
+            bindinput="handleFormInput"
+          />
+        </view>
+
+        <view class="form-item">
+          <text class="form-label">分类 *</text>
+          <picker 
+            mode="selector" 
+            range="{{categories}}"
+            range-key="name"
+            value="{{editForm.category_id - 1}}"
+            data-field="category_id"
+            bindchange="handleCategorySelect"
+          >
+            <view class="form-input picker">
+              {{categories[editForm.category_id - 1].name || '请选择分类'}}
+            </view>
+          </picker>
+        </view>
+
+        <view class="form-item">
+          <text class="form-label">描述</text>
+          <textarea 
+            class="form-textarea" 
+            placeholder="请输入菜品描述"
+            value="{{editForm.description}}"
+            data-field="description"
+            bindinput="handleFormInput"
+            maxlength="200"
+          />
+        </view>
+
+        <view class="form-item">
+          <text class="form-label">排序</text>
+          <input 
+            class="form-input" 
+            type="number"
+            placeholder="数字越小越靠前"
+            value="{{editForm.sort_order}}"
+            data-field="sort_order"
+            bindinput="handleFormInput"
+          />
+        </view>
+      </view>
+
+      <view class="modal-footer">
+        <button class="btn-modal cancel" bindtap="handleCloseEdit">取消</button>
+        <button class="btn-modal confirm" bindtap="handleSaveDish">保存</button>
+      </view>
+    </view>
+  </view>
+</view>
+

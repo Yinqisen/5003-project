@@ -1,0 +1,111 @@
+<!--pages/admin/statistics/statistics.wxml-->
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">数据统计</text>
+    <button class="btn-refresh" bindtap="handleRefresh">刷新</button>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{stats}}" class="stats-content">
+    <!-- 总览卡片 -->
+    <view class="stats-row">
+      <view class="stat-card">
+        <text class="stat-value">{{stats.user_count || 0}}</text>
+        <text class="stat-label">总用户数</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{stats.order_count || 0}}</text>
+        <text class="stat-label">总订单数</text>
+      </view>
+    </view>
+
+    <view class="stats-row">
+      <view class="stat-card">
+        <text class="stat-value">¥{{stats.total_sales || 0}}</text>
+        <text class="stat-label">总销售额</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">¥{{stats.today_sales || 0}}</text>
+        <text class="stat-label">今日销售额</text>
+      </view>
+    </view>
+
+    <view class="stats-row">
+      <view class="stat-card full">
+        <text class="stat-value">{{stats.today_order_count || 0}}</text>
+        <text class="stat-label">今日订单数</text>
+      </view>
+    </view>
+
+    <!-- 热销菜品 -->
+    <view class="section">
+      <view class="section-title">热销菜品 TOP5</view>
+      <view class="hot-dishes">
+        <view wx:for="{{stats.hot_dishes}}" wx:key="id" class="hot-dish-item">
+          <view class="rank">{{index + 1}}</view>
+          <view class="dish-info">
+            <text class="dish-name">{{item.name}}</text>
+            <text class="dish-price">¥{{item.price}}</text>
+          </view>
+          <view class="sales-count">销量: {{item.sales}}</view>
+        </view>
+        
+        <view wx:if="{{!stats.hot_dishes || stats.hot_dishes.length === 0}}" class="empty-tip">
+          暂无销售数据
+        </view>
+      </view>
+    </view>
+
+    <!-- 用户概览 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">用户概览</view>
+        <text class="section-count">共{{userTotal}}人</text>
+      </view>
+      
+      <view class="quick-info">
+        <view class="quick-item">
+          <text class="quick-label">最近注册</text>
+          <text class="quick-value">{{recentUsers.length > 0 ? recentUsers[0].nickname || recentUsers[0].username : '-'}}</text>
+        </view>
+        <view class="quick-item">
+          <text class="quick-label">注册时间</text>
+          <text class="quick-value">{{recentUsers.length > 0 ? recentUsers[0].created_at : '-'}}</text>
+        </view>
+      </view>
+
+      <button class="btn-view-all" bindtap="handleViewAllUsers">
+        查看全部用户详情 →
+      </button>
+    </view>
+
+    <!-- 订单概览 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">订单概览</view>
+        <text class="section-count">共{{orderTotal}}单</text>
+      </view>
+      
+      <view class="quick-info">
+        <view class="quick-item">
+          <text class="quick-label">最新订单</text>
+          <text class="quick-value">{{recentOrders.length > 0 ? recentOrders[0].order_no : '-'}}</text>
+        </view>
+        <view class="quick-item">
+          <text class="quick-label">订单金额</text>
+          <text class="quick-value">{{recentOrders.length > 0 ? '¥' + recentOrders[0].total_price : '-'}}</text>
+        </view>
+      </view>
+
+      <button class="btn-view-all" bindtap="handleViewAllOrders">
+        查看全部订单详情 →
+      </button>
+    </view>
+  </view>
+
+  <view wx:else class="empty">
+    <text class="empty-text">暂无统计数据</text>
+  </view>
+</view>
+
