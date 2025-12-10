@@ -47,11 +47,10 @@ miniprogram-1/
 - Order Management (View, Update Status)
 - Data Statistics
   
-## 数据库设计
 
-##DBD(Database Design)
+## DBD(Database Design)
 
-###Main table structure
+### Main table structure
 - `users` 
 - `admins` 
 - `categories`
@@ -68,7 +67,7 @@ Make sure MySQL is installed and then import the database:
 # Log in to MySQL
 mysql -u root -psun834214
 
-#Import SQL file
+# Import SQL file
 source database.sql
 ```
 
@@ -96,14 +95,14 @@ python main.py
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
- http://localhost:8000 
+
 
 ### 4. Configure WeChat Mini Program
 
 1. Open the `miniprogram-1` directory using the WeChat Developer Tool.
 2. Compile and preview the mini program
 
-##API documentation
+## API documentation
 
 After starting the service, visit:http://localhost:8000/docs
 
