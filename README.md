@@ -1,33 +1,33 @@
-# 微信点餐小程序 - FastAPI后端
+# WeChat food ordering mini-program - FastAPI backend
 
-一个完整的微信点餐小程序系统，包含FastAPI后端和微信小程序前端。
+A complete WeChat food ordering mini-program system, including a FastAPI backend and a WeChat mini-program frontend.
 
-## 项目结构
+## project structure
 
 ```
 FastAPIProject/
-├── main.py              # 主应用入口
-├── database.py          # 数据库连接配置
-├── models.py            # 数据模型定义
-├── database.sql         # 数据库初始化SQL文件
-├── requirements.txt     # Python依赖
-└── README.md           # 项目文档
+├── main.py              # Main application entry point
+├── database.py          # Database connection configuration
+├── models.py            # Data model definition
+├── database.sql         # Database initialization SQL file
+├── requirements.txt     # Python dependencies
+└── README.md           # project documentation
 
 miniprogram-1/
-├── app.js              # 小程序主入口
-├── app.json            # 小程序配置
-├── app.wxss            # 全局样式
-├── pages/              # 页面目录
-│   ├── login/         # 登录页
-│   ├── index/         # 首页（菜品列表）
-│   ├── cart/          # 购物车
-│   ├── order/         # 订单列表
-│   ├── order-detail/  # 订单详情
-│   └── my/            # 我的
+├── app.js              # The main entry point of the mini program
+├── app.json            # Mini-program configuration
+├── app.wxss            # Global styles
+├── pages/              # Table of Contents
+│   ├── login/         # entry page
+│   ├── index/         # Home Page (Menu List)
+│   ├── cart/          # shopping trolley
+│   ├── order/         # Order list
+│   ├── order-detail/  # Order Details
+│   └── my/            # 
 └── utils/
-    ├── request.js     # API请求封装
-    └── util.js        # 工具函数
-```
+    ├── request.js     # API request encapsulation
+    └── util.js        # Utility functions
+
 
 ## 功能特性
 
