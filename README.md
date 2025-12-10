@@ -28,184 +28,164 @@ miniprogram-1/
     ├── request.js     # API request encapsulation
     └── util.js        # Utility functions
 
+## functional characteristics
 
-## 功能特性
+### User End
+- User Login (WeChat Authorization / Quick Login)
+- Browse Dishes (by Category)
+- Add to Cart
+- Place Order
+- Order Management (View, Cancel)
+- Personal Center
 
-### 用户端
-- 用户登录（微信授权/快速登录）
-- 浏览菜品（按分类）
-- 加入购物车
-- 下单购买
-- 订单管理（查看、取消）
-- 个人中心
+### Management API
+- Administrator Login
+- Menu Management (Add, Delete, Update, Query)
+- Category Management (Add, Delete, Update, Query)
+- Order Management (View, Update Status)
+- Data Statistics
 
-### 管理端API
-- 管理员登录
-- 菜品管理（增删改查）
-- 分类管理（增删改查）
-- 订单管理（查看、更新状态）
-- 数据统计
+##DBD(Database Design)
 
-## 数据库设计
+###Main table structure
+- `users` 
+- `admins` 
+- `categories`
+- `dishes` 
+- `orders` 
+- `order_items` 
 
-### 主要表结构
-- `users` - 用户表
-- `admins` - 管理员表
-- `categories` - 菜品分类表
-- `dishes` - 菜品表
-- `orders` - 订单表
-- `order_items` - 订单明细表
+## Quick Start
 
-## 快速开始
+### 1.database configuration
 
-### 1. 数据库配置
-
-确保已安装MySQL，然后导入数据库：
-
+Make sure MySQL is installed and then import the database:
 ```bash
-# 登录MySQL
+# Log in to MySQL
 mysql -u root -psun834214
 
-# 导入SQL文件
+#Import SQL file
 source database.sql
 ```
 
-数据库配置信息：
-- 主机：localhost
-- 端口：3306
-- 用户：root
-- 密码：sun834214
-- 数据库：order_system
+Database configuration information:
+- host：localhost
+- COM port：3306
+  user：root
+- passport：sun834214
+- database：order_system
 
-### 2. 安装后端依赖
+### 2. Install backend dependencies
 
 ```bash
 cd FastAPIProject
 pip install -r requirements.txt
 ```
 
-### 3. 启动后端服务
+### 3. Start the backend service.
 
 ```bash
-# 开发模式
+# development mode
 python main.py
 
-# 或使用uvicorn
+# Or use uvicorn
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-服务将在 http://localhost:8000 启动
+ http://localhost:8000 
 
-### 4. 配置微信小程序
+### 4. Configure WeChat Mini Program
 
-1. 使用微信开发者工具打开 `miniprogram-1` 目录
-2. 修改 `utils/request.js` 中的 `BASE_URL` 为你的后端地址
-3. 编译并预览小程序
+1. Open the `miniprogram-1` directory using the WeChat Developer Tool.
+2. Compile and preview the mini program
 
-## API文档
+##API documentation
 
-启动服务后访问：http://localhost:8000/docs
+After starting the service, visit:http://localhost:8000/docs
 
-### 主要接口
+### Main interfaces
 
-#### 用户相关
-- `POST /api/user/login` - 用户登录
-- `GET /api/user/info` - 获取用户信息
-- `PUT /api/user/update` - 更新用户信息
+#### User-related
+- `POST /api/user/login` - users login
+- `GET /api/user/info` - Obtain user information
+- `PUT /api/user/update` - Update user information
 
-#### 管理员相关
-- `POST /api/admin/login` - 管理员登录
-- `POST /api/admin/create` - 创建管理员
-- `GET /api/admin/list` - 管理员列表
+#### Administrator-related
+- `POST /api/admin/login` - Administrator Login
+- `POST /api/admin/create` - Create an administrator
+- `GET /api/admin/list` - List of administrators
 
-#### 分类相关
-- `GET /api/category/list` - 分类列表
-- `POST /api/category/create` - 创建分类
-- `PUT /api/category/{id}` - 更新分类
-- `DELETE /api/category/{id}` - 删除分类
+#### Classification related
+- `GET /api/category/list` -category listings
+- `POST /api/category/create` - Create a category
+- `PUT /api/category/{id}` - Update Categories
+- `DELETE /api/category/{id}` -Delete category
 
-#### 菜品相关
-- `GET /api/dish/list` - 菜品列表
-- `GET /api/dish/{id}` - 菜品详情
-- `POST /api/dish/create` - 创建菜品
-- `PUT /api/dish/{id}` - 更新菜品
-- `DELETE /api/dish/{id}` - 删除菜品
+#### Dish-related
+- `GET /api/dish/list` - Menu of Dishes
+- `GET /api/dish/{id}` - Dish Details
+- `POST /api/dish/create` - Create a dish
+- `PUT /api/dish/{id}` - Update dishes
+- `DELETE /api/dish/{id}` -Delete dish
 
-#### 订单相关
-- `POST /api/order/create` - 创建订单
-- `GET /api/order/my` - 我的订单
-- `GET /api/order/list` - 订单列表（管理员）
-- `GET /api/order/{id}` - 订单详情
-- `PUT /api/order/{id}/status` - 更新订单状态
-- `DELETE /api/order/{id}` - 取消订单
+#### Order-related
+- `POST /api/order/create` - create order
+- `GET /api/order/my` - my order
+- `GET /api/order/list` - Order List (Administrator)
+- `GET /api/order/{id}` -Order Details
+- `PUT /api/order/{id}/status` - Update order status
+- `DELETE /api/order/{id}` -cancellation of order
 
-#### 统计相关
-- `GET /api/statistics/overview` - 数据概览
+#### statistical dependence
+- `GET /api/statistics/overview` - Data Overview
 
-## 默认账号
+## Default account
 
-### 管理员账号
-- 用户名：admin
-- 密码：123456
+### Administrator account
+- user：admin
+- password：123456
 
-- 用户名：manager
-- 密码：123456
+- user：manager
+- password：123456
 
-### 测试数据
-数据库中已预置：
-- 5个菜品分类
-- 15道示例菜品
-- 2个管理员账号
+### test data
+has been pre-configured in the database：
+- Five categories of dishes
+- 15 sample dishes
+- 2 administrator accounts
+## Technology stack
 
-## 技术栈
+### Back-end technology
+- FastAPI - Modern Web frameworks
+- PyMySQL - MySQLDatabase-driven
+- Pydantic - data validation
+- Uvicorn - ASGI server
 
-### 后端
-- FastAPI - 现代Web框架
-- PyMySQL - MySQL数据库驱动
-- Pydantic - 数据验证
-- Uvicorn - ASGI服务器
-
-### 前端
-- 微信小程序原生开发
+### Front-end technology
+- Native development of WeChat Mini Programs
 - WXML + WXSS + JavaScript
 
-## 开发说明
+## development specification
 
-### 安全性
-- 密码明文存储（仅用于演示，生产环境请使用加密）
-- Token简化处理（生产环境建议使用JWT）
-- 微信登录mock处理（实际需对接微信API）
+### security
+- Plain text password storage (for demonstration only; use encryption in production environment)
+- Simplified token processing (JWT is recommended in production environment)
+- Mock processing for WeChat login (actual implementation requires integration with WeChat API)
+### CORSconfiguration
+The backend has been configured to allow all sources. Please adjust as needed in the production environment.
 
-### CORS配置
-后端已配置允许所有来源，生产环境请根据需要调整。
+### database connection
+Connection pool management is used to automatically handle the acquisition and release of connections.
 
-### 数据库连接
-使用连接池管理，自动处理连接的获取和释放。
 
-## 注意事项
 
-1. 本项目仅供学习参考使用
-2. 密码采用明文存储，不适用于生产环境
-3. 微信登录功能需要配置真实的AppID和AppSecret
-4. 图片上传功能未实现，需自行添加
-5. 支付功能未实现，需接入微信支付
+## Functions to be optimized
 
-## 待优化功能
-
-- [ ] 密码加密存储
-- [ ] JWT Token认证
-- [ ] 图片上传功能
-- [ ] 微信支付接入
-- [ ] Redis缓存
-- [ ] 日志系统
-- [ ] 单元测试
-- [ ] Docker部署
-
-## 许可证
-
-MIT License
-
-## 联系方式
-
-如有问题，欢迎提Issue。
-
+- [ ] Password encryption storage
+- [ ] JWT Token authentication
+- [ ] Image upload function
+- [ ] WeChat payment integration
+- [ ] Redis caching
+- [ ] Logging system
+- [ ] Unit testing
+- [ ] Docker deployment
