@@ -95,8 +95,6 @@ python main.py
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-
-
 ### 4. Configure WeChat Mini Program
 
 1. Open the `miniprogram-1` directory using the WeChat Developer Tool.
