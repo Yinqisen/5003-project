@@ -3,7 +3,7 @@
 
 A complete WeChat food ordering mini-program system, including a FastAPI backend and a WeChat mini-program frontend.
 
-## project structure
+## Project structure
 
 ```
 FastAPIProject/
@@ -31,7 +31,7 @@ miniprogram-1/
 ```
 
 
-## functional characteristics
+## Functional characteristics
 ### User End
 - User Login (WeChat Authorization / Quick Login)
 - Browse Dishes (by Category)
@@ -60,7 +60,7 @@ miniprogram-1/
 
 ## Quick Start
 
-### 1.database configuration
+### 1.Database configuration
 
 Make sure MySQL is installed and then import the database:
 ```bash
@@ -137,7 +137,7 @@ After starting the service, visit:http://localhost:8000/docs
 - `PUT /api/order/{id}/status` - Update order status
 - `DELETE /api/order/{id}` -cancellation of order
 
-#### statistical dependence
+#### Statistical dependence
 - `GET /api/statistics/overview` - Data Overview
 
 ## Default account
@@ -149,7 +149,7 @@ After starting the service, visit:http://localhost:8000/docs
 - user：manager
 - password：123456
 
-### test data
+### Test data
 has been pre-configured in the database：
 - Five categories of dishes
 - 15 sample dishes
@@ -166,16 +166,16 @@ has been pre-configured in the database：
 - Native development of WeChat Mini Programs
 - WXML + WXSS + JavaScript
 
-## development specification
+## Development specification
 
-### security
+### Security
 - Plain text password storage (for demonstration only; use encryption in production environment)
 - Simplified token processing (JWT is recommended in production environment)
 - Mock processing for WeChat login (actual implementation requires integration with WeChat API)
 ### CORSconfiguration
 The backend has been configured to allow all sources. Please adjust as needed in the production environment.
 
-### database connection
+### Database connection
 Connection pool management is used to automatically handle the acquisition and release of connections.
 
 
