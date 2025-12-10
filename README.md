@@ -1,5 +1,5 @@
 # WeChat food ordering mini-program - FastAPI backend
-==========
+
 
 A complete WeChat food ordering mini-program system, including a FastAPI backend and a WeChat mini-program frontend.
 
@@ -28,7 +28,7 @@ miniprogram-1/
 └── utils/
     ├── request.js     # API request encapsulation
     └── util.js        # Utility functions
-
+```
 
 
 ## functional characteristics
